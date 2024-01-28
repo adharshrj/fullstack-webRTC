@@ -1,0 +1,27 @@
+{
+  "name": "mypeerjs",
+  "version": "1.0.0",
+  "description": "peerjs server",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "eslint --fix --ext .ts .",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "yarn build",
+    "kill-port": "PORT_NUMBER=9001 && PID=$(fuser $PORT_NUMBER/tcp 2>/dev/null) && [ -n \"$PID\" ] && kill -9 $PID || true",
+    "start": "node --watch dist/index.js",
+    "dev": "concurrently --kill-others \"yarn kill-port && yarn watch\" \"yarn start\""
+  },
+  "author": "adharshrj",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "peer": "^1.0.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
+    "@typescript-eslint/parser": "^6.18.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  }
+}
